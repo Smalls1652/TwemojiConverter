@@ -1,6 +1,8 @@
 name: Generate PNGs
 
 on:
+    schedule:
+      - cron: '30 13 * * 1'
     workflow_dispatch:
 
 jobs:
@@ -12,6 +14,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
               with:
+                ref: v0.1.0
                 fetch-depth: 0
             
             - name: Setup .NET SDK
