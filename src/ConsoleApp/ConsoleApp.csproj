@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PublishAot>true</PublishAot>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RootNamespace>TwemojiConverter.ConsoleApp</RootNamespace>
+    <AssemblyName>twemoji-converter</AssemblyName>
+    <PackageId>TwemojiConverter.ConsoleApp</PackageId>
+
+    <Description>
+      CLI tool for converting Twemoji SVG files to PNGs.
+    </Description>
+
+    <Authors>Timothy Small</Authors>
+    <Company>Smalls.Online</Company>
+    <Copyright>© Smalls.Online</Copyright>
+
+    <RepositoryUrl>https://github.com/Smalls1652/TwemojiConverter.ConsoleApp</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.24068.1" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.5.0" />
+  </ItemGroup>
+
+</Project>

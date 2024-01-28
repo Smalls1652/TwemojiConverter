@@ -1,0 +1,156 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+			"label": "Publish: ConsoleApp",
+			"detail": "Compile TwemojiConverter.ConsoleApp.",
+			"icon": {
+				"id": "rocket",
+				"color": "terminal.ansiMagenta"
+			},
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				"${workspaceFolder}/src/ConsoleApp/",
+				"--configuration",
+				"Release",
+				"--runtime",
+				"${input:runtimePlatform}",
+				"--self-contained",
+				"--output",
+				"${workspaceFolder}/build/"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": "$msCompile",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			}
+		},
+		{
+			"label": "Build project",
+			"detail": "Build a project.",
+			"icon": {
+				"id": "tools",
+				"color": "terminal.ansiYellow"
+			},
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder}/${input:projectItem}",
+				"--configuration",
+				"${input:dotnetConfiguration}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Clean project",
+			"detail": "Clean a project.",
+			"icon": {
+				"id": "trashcan",
+				"color": "terminal.ansiBlack"
+			},
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"${workspaceFolder}/${input:projectItem}",
+				"--configuration",
+				"${input:dotnetConfiguration}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Restore project",
+			"detail": "Restore a project.",
+			"icon": {
+				"id": "sync",
+				"color": "terminal.ansiBlue"
+			},
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"restore",
+				"${workspaceFolder}/${input:projectItem}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": "$msCompile"
+		}
+		// Remaining tasks are only for the VSCode launch configs
+		// or are supporting tasks.
+    ],
+    "inputs": [
+		{
+			"id": "dotnetConfiguration",
+			"description": "Select a configuration for compilation.",
+			"type": "pickString",
+			"default": "Debug",
+			"options": [
+				{
+					"label": "Debug",
+					"value": "Debug"
+				},
+				{
+					"label": "Release",
+					"value": "Release"
+				}
+			]
+		},
+		{
+			"id": "projectItem",
+			"description": "Select a project.",
+			"type": "pickString",
+			"default": "TwemojiConverter.sln",
+			"options": [
+				{
+					"label": "Entire solution",
+					"value": "TwemojiConverter.sln"
+				},
+				{
+					"label": "ConsoleApp",
+					"value": "src/ConsoleApp/"
+				}
+			]
+		},
+		{
+			"id": "containerPlatformArch",
+			"description": "Select a platform architecture for the container.",
+			"type": "pickString",
+			"default": "linux/arm64",
+			"options": [
+				"linux/amd64",
+				"linux/arm64"
+			]
+		},
+		{
+			"id": "runtimePlatform",
+			"description": "The platform to compile for.",
+			"type": "pickString",
+			"default": "osx-arm64",
+			"options": [
+				"linux-x64",
+				"linux-arm64",
+				"osx-x64",
+				"osx-arm64",
+				"win-x64",
+				"win-arm64"
+			]
+		}
+	]
+}
