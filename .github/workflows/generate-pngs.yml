@@ -57,9 +57,12 @@ jobs:
                 repository: discord/twemoji
                 path: twemoji
 
-            - name: Run converter
+            - name: Enable executable permissions
               run: |
                 chmod +x ./twemoji-converter
+
+            - name: Run converter
+              run: |
                 ./twemoji-converter --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
 
             - name: Upload converted PNGs
