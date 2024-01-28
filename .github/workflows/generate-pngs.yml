@@ -59,6 +59,7 @@ jobs:
 
             - name: Run converter
               run: |
+                chmod +x ./twemoji-converter
                 ./twemoji-converter --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
 
             - name: Upload converted PNGs
