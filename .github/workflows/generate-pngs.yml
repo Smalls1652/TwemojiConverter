@@ -33,8 +33,8 @@ jobs:
             - name: Upload compiled binary
               uses: actions/upload-artifact@v4
               with:
-                name: twemoji-converter
-                path: ${{ github.workspace }}/build/twemoji-converter
+                name: twemoji-converter-linux-x64
+                path: ${{ github.workspace }}/build/**/*
                 if-no-files-found: error
 
     convert:
@@ -49,7 +49,7 @@ jobs:
             - name: Download compiled binary
               uses: actions/download-artifact@v4
               with:
-                name: twemoji-converter
+                name: twemoji-converter-linux-x64
             
             - name: Clone Twemoji repo
               uses: actions/checkout@v4
@@ -59,11 +59,11 @@ jobs:
 
             - name: Enable executable permissions
               run: |
-                chmod +x ./twemoji-converter
+                chmod +x ./twemoji-converter-linux-x64/twemoji-converter
 
             - name: Run converter
               run: |
-                ./twemoji-converter convert --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
+                ./twemoji-converter-linux-x64twemoji-converter convert --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
 
             - name: Upload converted PNGs
               uses: actions/upload-artifact@v4
