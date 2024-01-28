@@ -50,6 +50,7 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                 name: twemoji-converter-linux-x64
+                path: ${{ github.workspace }}/tool/
             
             - name: Clone Twemoji repo
               uses: actions/checkout@v4
@@ -59,11 +60,11 @@ jobs:
 
             - name: Enable executable permissions
               run: |
-                chmod +x ./twemoji-converter-linux-x64/twemoji-converter
+                chmod +x ./tool/twemoji-converter
 
             - name: Run converter
               run: |
-                ./twemoji-converter-linux-x64twemoji-converter convert --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
+                ./tool/twemoji-converter convert --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
 
             - name: Upload converted PNGs
               uses: actions/upload-artifact@v4
