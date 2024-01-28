@@ -21,8 +21,8 @@ jobs:
             
             - name: Run dotnet restore
               run: |
-                dotnet restore ./ConsoleApp/
+                dotnet restore ./src/ConsoleApp/
             
             - name: Run dotnet build
               run: |
-                dotnet build ./ConsoleApp/
+                dotnet build ./src/ConsoleApp/
