@@ -107,6 +107,7 @@ public class ConvertCommandAction : AsynchronousCliAction
                 image.Settings.Compression = CompressionMethod.LZMA;
 
                 image.Settings.AntiAlias = true;
+                image.Settings.TextAntiAlias = true;
 
                 ConsoleUtils.WriteOutput($"[{i + 1}/{svgFiles.Length}] {Path.GetFileName(svgFiles[i])} -> {Path.GetRelativePath(Environment.CurrentDirectory, convertedImagePath)}");
                 image.Write(convertedImagePath, MagickFormat.Png8);
