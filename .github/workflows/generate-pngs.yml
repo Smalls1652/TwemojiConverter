@@ -1,0 +1,69 @@
+name: Generate PNGs
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Build CLI tool
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            
+            - name: Setup .NET SDK
+              uses: actions/setup-dotnet@v4
+              with:
+                global-json-file: global.json
+
+            - name: Restore dotnet tools
+              run: dotnet tool restore
+
+            - name: Run GitVersion
+              run: |
+                dotnet tool run dotnet-gitversion /updateprojectfiles
+
+            - name: Compile project
+              run: |
+                dotnet publish ./src/ConsoleApp/ --configuration "Release" --output "./build/" --runtime "linux-x64" --self-contained
+
+            - name: Upload compiled binary
+              uses: actions/upload-artifact@v4
+              with:
+                name: twemoji-converter
+                path: ${{ github.workspace }}/build/twemoji-converter
+                if-no-files-found: error
+
+    convert:
+        name: Convert to PNGs
+        needs: build
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            image-size: [ 128, 256, 512 ]
+        
+        steps:
+            - name: Download compiled binary
+              uses: actions/download-artifact@v4
+              with:
+                name: twemoji-converter
+            
+            - name: Clone Twemoji repo
+              uses: actions/checkout@v4
+              with:
+                repository: discord/twemoji
+                path: twemoji
+
+            - name: Run converter
+              run: |
+                ./twemoji-converter --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
+
+            - name: Upload converted PNGs
+              uses: actions/upload-artifact@v4
+              with:
+                name: discord-twemoji-png-${{ matrix.image-size }}
+                path: ${{ github.workspace }}/converted/**/*
+                if-no-files-found: error
+
+            
