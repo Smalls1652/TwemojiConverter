@@ -2,6 +2,9 @@ using System.CommandLine;
 
 namespace TwemojiConverter.ConsoleApp.Commands;
 
+/// <summary>
+/// CLI command for running the conversion process.
+/// </summary>
 public class ConvertCommand : CliCommand
 {
     public ConvertCommand() : base("convert")
