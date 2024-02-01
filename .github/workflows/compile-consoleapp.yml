@@ -1,0 +1,55 @@
+name: Compile ConsoleApp
+
+on:
+    push:
+        tags:
+            - "v*.*.*"
+    workflow_call:
+        inputs:
+            ref:
+                description: "The git reference to build."
+                required: false
+                type: string
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Build CLI tool
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              if: ${{ inputs.ref == null || inputs.ref == '' }}
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+            
+            - name: Checkout (Specific ref)
+              if: ${{ inputs.ref != null || inputs.ref != '' }}
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ inputs.ref }}
+                fetch-depth: 0
+
+            - name: Setup .NET SDK
+              uses: actions/setup-dotnet@v4
+              with:
+                global-json-file: global.json
+
+            - name: Restore dotnet tools
+              run: dotnet tool restore
+
+            - name: Run GitVersion
+              run: |
+                dotnet tool run dotnet-gitversion /updateprojectfiles
+
+            - name: Compile project
+              run: |
+                dotnet publish ./src/ConsoleApp/ --configuration "Release" --output "./build/" --runtime "linux-x64" --self-contained
+
+            - name: Upload compiled binary
+              uses: actions/upload-artifact@v4
+              with:
+                name: twemoji-converter-linux-x64
+                path: ${{ github.workspace }}/build/**/*
+                if-no-files-found: error

@@ -7,38 +7,9 @@ on:
 
 jobs:
     build:
-        name: Build CLI tool
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                ref: v0.2.0
-                fetch-depth: 0
-            
-            - name: Setup .NET SDK
-              uses: actions/setup-dotnet@v4
-              with:
-                global-json-file: global.json
-
-            - name: Restore dotnet tools
-              run: dotnet tool restore
-
-            - name: Run GitVersion
-              run: |
-                dotnet tool run dotnet-gitversion /updateprojectfiles
-
-            - name: Compile project
-              run: |
-                dotnet publish ./src/ConsoleApp/ --configuration "Release" --output "./build/" --runtime "linux-x64" --self-contained
-
-            - name: Upload compiled binary
-              uses: actions/upload-artifact@v4
-              with:
-                name: twemoji-converter-linux-x64
-                path: ${{ github.workspace }}/build/**/*
-                if-no-files-found: error
+        uses: ./.github/workflows/compile-consoleapp.yml
+        with:
+          ref: "v0.2.0"
 
     convert:
         name: Convert to PNGs
