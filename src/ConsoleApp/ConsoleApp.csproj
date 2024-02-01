@@ -6,8 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
-    <InvariantGlobalization>true</InvariantGlobalization>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OptimizationPreference>Speed</OptimizationPreference>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <DebuggerSupport>false</DebuggerSupport>
+    <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+    <EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+    <StackTraceSupport>false</StackTraceSupport>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -23,7 +31,7 @@
     <Company>Smalls.Online</Company>
     <Copyright>© Smalls.Online</Copyright>
 
-    <RepositoryUrl>https://github.com/Smalls1652/TwemojiConverter.ConsoleApp</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Smalls1652/TwemojiConverter</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
