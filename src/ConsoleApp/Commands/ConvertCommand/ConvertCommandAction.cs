@@ -5,8 +5,20 @@ using TwemojiConverter.ConsoleApp.Utilities;
 
 namespace TwemojiConverter.ConsoleApp.Commands;
 
+/// <summary>
+/// CLI command action for running the conversion process.
+/// </summary>
+/// <remarks>
+/// This is used by <see cref="ConvertCommand"/>.
+/// </remarks>
 public class ConvertCommandAction : AsynchronousCliAction
 {
+    /// <summary>
+    /// Invokes the action for the 'convert' command.
+    /// </summary>
+    /// <param name="parseResult">The <see cref="ParseResult"/> for the command.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> for the command.</param>
+    /// <returns>The exit code for the command.</returns>
     public override async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default)
     {
         string svgDirectoryPath;
@@ -139,7 +151,7 @@ public class ConvertCommandAction : AsynchronousCliAction
         return 0;
     }
 
-    private string ParseSvgDirectoryArgument(ParseResult parseResult)
+    private static string ParseSvgDirectoryArgument(ParseResult parseResult)
     {
         string? svgDirectoryPath = parseResult.GetValue<string>("--svg-directory");
 
@@ -151,7 +163,7 @@ public class ConvertCommandAction : AsynchronousCliAction
         return svgDirectoryPath;
     }
 
-    private string ParseOutputDirectoryArgument(ParseResult parseResult)
+    private static string ParseOutputDirectoryArgument(ParseResult parseResult)
     {
         string? outputDirectoryPath = parseResult.GetValue<string>("--output-directory");
 
@@ -163,14 +175,14 @@ public class ConvertCommandAction : AsynchronousCliAction
         return outputDirectoryPath;
     }
 
-    private int ParseOutputResolutionArgument(ParseResult parseResult)
+    private static int ParseOutputResolutionArgument(ParseResult parseResult)
     {
         int outputResolution = parseResult.GetValue<int>("--output-resolution");
 
         return outputResolution;
     }
 
-    private string[] GetSvgFiles(string directoryPath)
+    private static string[] GetSvgFiles(string directoryPath)
     {
         string[] svgFiles = Directory.GetFiles(
             path: directoryPath,
@@ -185,7 +197,7 @@ public class ConvertCommandAction : AsynchronousCliAction
         return svgFiles;
     }
 
-    private Task<bool> OptimizeImageAsync(SemaphoreSlim semaphoreSlim, ImageOptimizer imageOptimizer, string imagePath, CancellationToken cancellationToken = default)
+    private static Task<bool> OptimizeImageAsync(SemaphoreSlim semaphoreSlim, ImageOptimizer imageOptimizer, string imagePath, CancellationToken cancellationToken = default)
     {
         return Task.Run(() =>
         {

@@ -1,10 +1,9 @@
 ﻿using System.CommandLine;
 using TwemojiConverter.ConsoleApp;
-using TwemojiConverter.ConsoleApp.Utilities;
 
 using CancellationTokenSource cancellationTokenSource = new();
 
-TwemojiConverterRootCommand rootCommand = new TwemojiConverterRootCommand();
+TwemojiConverterRootCommand rootCommand = new();
 
 CliConfiguration cliConfig = new(rootCommand);
 

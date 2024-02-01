@@ -67,7 +67,7 @@ jobs:
 
             - name: Run converter
               run: |
-                ./tool/twemoji-converter convert --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }}
+                ./tool/twemoji-converter convert --svg-directory "./twemoji/assets/svg/" --output-directory "./converted/" --output-resolution ${{ matrix.image-size }} ; ./tool/twemoji-converter get-info --output-path "./converted/_emojiList.json" --image-directory-path "./converted/"
 
             - name: Upload converted PNGs
               uses: actions/upload-artifact@v4
