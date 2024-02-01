@@ -7,7 +7,7 @@ namespace TwemojiConverter.ConsoleApp.Commands;
 /// </summary>
 public class InfoCommand : CliCommand
 {
-    public InfoCommand() : base("info")
+    public InfoCommand() : base("get-info")
     {
         Description = "Gets emoji information from Unicode.";
 
