@@ -18,7 +18,9 @@ A workflow is setup in this repo to convert the `SVG` files to `PNG` files (In `
 > 
 > Before building, you need to know the ["runtime identifier"](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog#known-rids) for your platform. For simplicity, these docs will use `linux-x64`. Replace that value with what you use, if needed.
 > 
-> For example if you're building on a **x64 Linux-based system**, the identifier would be `linux-x64`. If you're building on an **Apple-silicon macOS system**, the identifier would be `osx-arm64`.
+> For example if:
+> * You're building on a **x64 Linux-based system**, the identifier would be `linux-x64`.
+> * You're building on an **Apple-silicon macOS system**, the identifier would be `osx-arm64`.
 
 #### Command-line
 
